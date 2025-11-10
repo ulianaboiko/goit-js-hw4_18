@@ -1,0 +1,23 @@
+{
+  "name": "goit-js-hw4_18",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./",
+    "deploy": "gh-pages -d dist",
+    "server": "json-server --watch ./data/students.json"
+  },
+  "keywords": [],
+  "author": "Uliana Boiko <ulianabojko39@gmail.com>",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "parcel": "^2.16.1"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}

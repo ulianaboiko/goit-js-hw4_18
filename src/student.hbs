@@ -1,0 +1,16 @@
+{{#each this}}
+  <tr>
+    <td>{{student.id}}</td>
+    <td>{{student.name}}</td>
+    <td>{{student.age}}</td>
+    <td>{{student.course}}</td>
+    <td>{{student.skills}}</td>
+    <td>{{student.email}}</td>
+    <td>{{student.isEnrolled}}</td>
+    <td>
+      <button onclick="updateStudent({{student.id}})">Оновити</button>
+      <button onclick="deleteStudent({{student.id}})">Видалити</button>
+    </td>
+  </tr>
+
+{{/each}}

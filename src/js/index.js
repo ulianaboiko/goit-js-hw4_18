@@ -1,29 +1,40 @@
-// Функція для отримання всіх студентів
+import { getStudents } from "./API/getStudents";
+import { addStudent } from "./API/addStudent";
+import { updateStudent } from "./API/updateStudent";
+import { deleteStudent } from "./API/deleteStudent";
 
-function getStudents() {
-  // твій код
-}
+import Handlebars from "handlebars";
+import studentSource from "bundle-text:../student.hbs";
+const studentTempl = Handlebars.compile(studentSource);
+
+const newStudentForm = document.querySelector(".add-student-form");
+const getBtn = document.querySelector("#get-students-btn");
+const tableStudents = document.querySelector(".students");
+
+const API_URL = "http://localhost:3000/students";
 
 // Функція для відображення студентів у таблиці
+const renderStudents = (students) => {
+  students.forEach((student) => {
+    tableStudents.innerHTML = studentTempl;
+  });
+};
 
-function renderStudents(students) {
-  // твій код
-}
+getBtn.addEventListener("click", (st) => getStudents(API_URL));
 
-// Функція для додавання нового студента
+const handleAddSt = (event) => {
+  event.preventDefault();
 
-function addStudent(e) {
-  // твій код
-}
-
-// Функція для оновлення студента
-
-function updateStudent(id) {
-  // твій код
-}
-
-// Функція для видалення студента
-
-function deleteStudent(id) {
-  // твій код
-}
+  const form = event.target;
+  const newStudent = {
+    name: form.stName.value.trim(),
+    age: parseInt(form.stAge).value.trim(),
+    course: form.stCourse.value.trim(),
+    skills: form.stSkills.value,
+    email: form.stEmail.value.trim(),
+    isEnrolled: form.stEnroled.checked,
+  };
+  addStudent(newStudent, API_URL);
+  form.reset();
+};
+newStudentForm.addEventListener("submit", handleAddSt);

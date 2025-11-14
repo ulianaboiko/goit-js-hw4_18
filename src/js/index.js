@@ -1,7 +1,9 @@
-import { getStudents } from "./API/getStudents";
-import { addStudent } from "./API/addStudent";
-import { updateStudent } from "./API/updateStudent";
-import { deleteStudent } from "./API/deleteStudent";
+import {
+  getStudents,
+  addStudent,
+  updateStudent,
+  deleteStudent,
+} from "./API/api";
 
 import Handlebars from "handlebars";
 import studentSource from "bundle-text:../student.hbs";
@@ -11,18 +13,18 @@ const newStudentForm = document.querySelector(".add-student-form");
 const getBtn = document.querySelector("#get-students-btn");
 const tableStudents = document.querySelector(".students");
 
-const API_URL = "http://localhost:3000/students";
-
 // Функція для відображення студентів у таблиці
 const renderStudents = (students) => {
-  students.forEach((student) => {
-    tableStudents.innerHTML = studentTempl;
-  });
+  tableStudents.innerHTML = studentTempl({ students });
 };
 
-getBtn.addEventListener("click", (st) => getStudents(API_URL));
+getBtn.addEventListener("click", () =>
+  getStudents()
+    .then((data) => renderStudents(data))
+    .catch((err) => console.error(err))
+);
 
-const handleAddSt = (event) => {
+const handleAddStudent = (event) => {
   event.preventDefault();
 
   const form = event.target;
@@ -30,11 +32,15 @@ const handleAddSt = (event) => {
     name: form.stName.value.trim(),
     age: parseInt(form.stAge).value.trim(),
     course: form.stCourse.value.trim(),
-    skills: form.stSkills.value,
+    skills: form.stSkills.value.split(",").map((s) => s.trim()),
     email: form.stEmail.value.trim(),
     isEnrolled: form.stEnroled.checked,
   };
-  addStudent(newStudent, API_URL);
+
+  addStudent(newStudent)
+    .then(() => getStudents())
+    .then((students) => renderStudents(students))
+    .catch((err) => console.error("Помилка POST:", err));
   form.reset();
 };
-newStudentForm.addEventListener("submit", handleAddSt);
+newStudentForm.addEventListener("submit", handleAddStudent);

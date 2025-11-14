@@ -1,15 +1,15 @@
-{{#each this}}
+{{#each students}}
   <tr>
-    <td>{{student.id}}</td>
-    <td>{{student.name}}</td>
-    <td>{{student.age}}</td>
-    <td>{{student.course}}</td>
-    <td>{{student.skills}}</td>
-    <td>{{student.email}}</td>
-    <td>{{student.isEnrolled}}</td>
+    <td>{{id}}</td>
+    <td>{{name}}</td>
+    <td>{{age}}</td>
+    <td>{{course}}</td>
+    <td>{{skills}}</td>
+    <td>{{email}}</td>
+    <td>{{isEnrolled}}</td>
     <td>
-      <button onclick="updateStudent({{student.id}})">Оновити</button>
-      <button onclick="deleteStudent({{student.id}})">Видалити</button>
+      <button onclick="updateStudent({{id}})">Оновити</button>
+      <button onclick="deleteStudent({{id}})">Видалити</button>
     </td>
   </tr>
 

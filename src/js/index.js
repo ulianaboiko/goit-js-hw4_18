@@ -30,7 +30,7 @@ const handleAddStudent = (event) => {
   const form = event.target;
   const newStudent = {
     name: form.stName.value.trim(),
-    age: parseInt(form.stAge).value.trim(),
+    age: parseInt(form.stAge).value,
     course: form.stCourse.value.trim(),
     skills: form.stSkills.value.split(",").map((s) => s.trim()),
     email: form.stEmail.value.trim(),
@@ -38,9 +38,24 @@ const handleAddStudent = (event) => {
   };
 
   addStudent(newStudent)
-    .then(() => getStudents())
-    .then((students) => renderStudents(students))
+    .then((data) => renderStudents(data))
     .catch((err) => console.error("Помилка POST:", err));
   form.reset();
 };
 newStudentForm.addEventListener("submit", handleAddStudent);
+
+const handleUpdateOrDeleteSt = (event) => {
+  const id = event.target.dataset.id;
+
+  if (event.target.className === "updateStudent") {
+  }
+
+  if (event.target.className === "deleteStudent") {
+    deleteStudent(id)
+      .then(() => getStudents())
+      .then((data) => renderStudents(data));
+    return;
+  }
+};
+
+tableStudents.addEventListener("click", handleUpdateOrDeleteSt);

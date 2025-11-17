@@ -22,9 +22,6 @@ export const addStudent = (student) => {
       if (!response.ok) throw new Error(`Помилка ${response.statusText}`);
       return response.json();
     })
-    .then((data) => {
-      console.log("Створено нового студента", data);
-    })
     .catch((err) => console.error(err));
 };
 
@@ -41,9 +38,8 @@ export const updateStudent = (id, updatedStudent) => {
   return fetch(studentUrl, options)
     .then((response) => {
       if (!response.ok) throw new Error(`Помилка ${response.statusText}`);
-      response.json();
+      return response.json();
     })
-    .then((data) => console.log("Ресурс оновлено", data))
     .catch((err) => console.error(err));
 };
 
@@ -54,7 +50,7 @@ export const deleteStudent = (id) => {
     method: "DELETE",
   };
 
-  fetch(studentUrl, options)
+  return fetch(studentUrl, options)
     .then((response) => {
       if (!response.ok) throw new Error(`Помилка ${response.statusText}`);
       console.log(`Ресурс з id-${id} видалено`);

@@ -30,7 +30,7 @@ export const updateStudent = (id, updatedStudent) => {
   const studentUrl = `${API_URL}/${id}`;
 
   const options = {
-    method: "PATCH",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedStudent),
   };
@@ -54,6 +54,7 @@ export const deleteStudent = (id) => {
     .then((response) => {
       if (!response.ok) throw new Error(`Помилка ${response.statusText}`);
       console.log(`Ресурс з id-${id} видалено`);
+      return response.json();
     })
     .catch((err) => console.error(err));
 };

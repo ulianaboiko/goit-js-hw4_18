@@ -12037,4 +12037,4 @@ module.exports = "{{#each students}}\r\n  <tr>\r\n    <td>{{id}}</td>\r\n    <td
 
 },{}]},["6DHTQ","6kb64"], "6kb64", "parcelRequire593e", {})
 
-//# sourceMappingURL=goit-js-hw4_18-2.6528c13b.js.map
+//# sourceMappingURL=goit-js-hw4_18-3.6528c13b.js.map
